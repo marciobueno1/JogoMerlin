@@ -1,6 +1,7 @@
 import { Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 export function Square({ value, onPress }) {
+  console.log('value', value);
   return (
     <TouchableOpacity style={styles.square} onPress={onPress}>
       <Text style={styles.squareText}>{value}</Text>
