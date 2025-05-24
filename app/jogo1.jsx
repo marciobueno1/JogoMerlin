@@ -22,7 +22,8 @@ export default function Game() {
 
   return (
     <View style={styles.container}>
-      <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
+      <Text style={styles.titulo}>Jogo da Velha</Text>
+      <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} resetGame={resetGame}/>
       <TouchableOpacity onPress={resetGame} style={styles.moveButton}>
         <Text style={styles.moveText}>Reiniciar Jogo</Text>
       </TouchableOpacity>
@@ -35,13 +36,22 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     justifyContent: 'center',
+    alignItems: "center",
     backgroundColor: '#f2afbc',
+  },
+  titulo:{
+    fontSize: 35,
+    fontWeight: "bold",
+    justifyContent: "center",
+    marginBottom: 50,
+
   },
   moveButton: {
     padding: 10,
-    backgroundColor: '#f1f1f1',
+    backgroundColor: '#f0d4bf',
     marginTop: 30,
-    borderRadius: 5,
+    width: 250,
+    borderRadius: 15,
   },
   moveText: {
     fontSize: 16,

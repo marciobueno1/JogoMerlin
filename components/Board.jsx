@@ -1,8 +1,8 @@
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, Alert } from "react-native";
 import { Square } from "./Square"
 
 
- export  function Board({ xIsNext, squares, onPlay }) {
+ export  function Board({ xIsNext, squares, onPlay, resetGame }) {
   function handleClick(i) {
     if (calculateWinner(squares) || squares[i]) return;
 
@@ -12,11 +12,22 @@ import { Square } from "./Square"
   }
 
   const winner = calculateWinner(squares);
-  const status = winner ? 'Winner: ' + winner : 'Next player: ' + (xIsNext ? 'X' : 'O');
+  
+  const status = winner ? winnerAlert(winner) : 'Next player: ' + (xIsNext ? 'X' : 'O');
+
+  function winnerAlert(winner){
+    Alert.alert("Parabéns!", "Vencedor: " + winner, [
+      {
+        text: 'Jogar Novamente',
+        onPress: () => resetGame(),
+        
+      },
+    ]);
+  }
 
   return (
     <View>
-      <Text style={styles.status}>{status}</Text>
+      
       {[0, 1, 2].map(row => (
         <View key={row} style={styles.boardRow}>
           {[0, 1, 2].map(col => {
@@ -31,6 +42,7 @@ import { Square } from "./Square"
           })}
         </View>
       ))}
+      <Text style={styles.status}>{status}</Text>
     </View>
   );
 }
@@ -59,4 +71,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
   },
+  status: {
+    marginTop: 20,
+    fontSize: 23,
+    alignSelf: "center"
+  }
 })
